@@ -1,9 +1,12 @@
-var app = require('express')();
-var http = require('http').createServer(app);
-var io = require('socket.io')(http);
+const app = require('express')();
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
+
+const PORT = process.env.PORT || 3000;
+const INDEX = '/index.html';
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html')
+    res.sendFile(__dirname + INDEX);
 });
 
 io.on('connection', (socket) => {
@@ -12,6 +15,6 @@ io.on('connection', (socket) => {
     });
 });
 
-http.listen(3000, () => {
-    console.log('listening on *:3000');
+http.listen(PORT, () => {
+    console.log('listening on ' + PORT);
 });
