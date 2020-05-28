@@ -1,11 +1,12 @@
 const app = require('express')();
+const path = require('path');
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 
 const PORT = process.env.PORT || 3000;
 const INDEX = '/index.html';
 
-app.use(express.static(__dirname + '/public'))
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + INDEX);
